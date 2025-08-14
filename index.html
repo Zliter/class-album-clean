@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>我们班的家｜在线相册（干净版）</title>
+  <style>
+    :root { --primary:#2b8cff; --bg:#fafafa; --card:#fff; --border:#e5e7eb; }
+    body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto; background:var(--bg); color:#111; }
+    .wrap { max-width:900px; margin:0 auto; padding:16px; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; }
+    h1 { font-size:22px; margin:8px 0 16px; }
+    .row { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
+    input[type="text"], .btn { padding:10px 12px; border-radius:10px; border:1px solid var(--border); }
+    .btn { background:#fff; cursor:pointer; }
+    .btn.primary { background:linear-gradient(120deg,#2b8cff,#22c1c3); color:#fff; border:none; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; margin-top:14px; }
+    .item { border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#fff; }
+    .item img { width:100%; display:block; }
+    .muted { color:#667085; font-size:13px; }
+    .drop { border:2px dashed var(--border); border-radius:12px; padding:16px; text-align:center; color:#667085; }
+  </style>
+  <!-- LeanCloud JS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4/dist/av-min.js"></script>
+  <!-- 你的配置 -->
+  <script src="./js/config.js"></script>
+  <!-- 页面逻辑 -->
+  <script defer src="./js/app.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>上传照片</h1>
+      <div id="drop" class="drop">
+        把图片拖到这里，或
+        <label class="btn" style="cursor:pointer">选择文件
+          <input id="picker" type="file" accept="image/*" multiple style="display:none">
+        </label>
+      </div>
+
+      <div class="row">
+        <input id="tagInput" type="text" placeholder="给本次上传打标签（逗号分隔） 例：运动会,合影" style="flex:1">
+        <button id="uploadBtn" class="btn primary">开始上传</button>
+        <button id="refreshBtn" class="btn">刷新</button>
+      </div>
+
+      <div id="tip" class="muted"></div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="row">
+        <input id="searchInput" type="text" placeholder="按标签搜索（空格分隔多个关键词） 例：运动会 合影" style="flex:1">
+        <button id="clearBtn" class="btn">清除</button>
+      </div>
+      <div id="list" class="grid"></div>
+      <div id="empty" class="muted" style="margin-top:8px; display:none">暂无图片</div>
+    </div>
+  </div>
+</body>
+</html>
